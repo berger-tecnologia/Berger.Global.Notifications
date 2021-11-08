@@ -7,7 +7,7 @@ namespace Berger.Global.Notifications.Tests.Contracts
     {
         public CustomerContract()
         {
-            RuleFor(c => c.Name).NotEmpty().WithMessage("Name cannot be empty");
+            RuleFor(c => c.Name).NotEmpty().WithMessage("Name could not be empty");
         }
     }
 }

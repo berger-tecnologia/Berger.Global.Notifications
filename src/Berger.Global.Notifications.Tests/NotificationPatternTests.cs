@@ -7,6 +7,7 @@ using Berger.Global.Notifications.Patterns;
 using Berger.Global.Notifications.Tests.Models;
 using Berger.Global.Notifications.Tests.Requests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Berger.Global.Notifications.Tests.Contracts;
 
 namespace Berger.Global.Notifications.Tests
 {
@@ -21,9 +22,9 @@ namespace Berger.Global.Notifications.Tests
 
         [TestMethod]
         [TestCategory("NotificationPattern")]
-        public void GetNotificationFromContext()
+        public void GetBasicNotification()
         {
-            new AddNotifications<Customer>(_customer).IfNullOrEmpty(x => x.Name);
+            new Notification<Customer>(_customer).IfNullOrEmpty(x => x.Name);
 
             Assert.IsTrue(_customer.IsInvalid());
         }
@@ -34,7 +35,7 @@ namespace Berger.Global.Notifications.Tests
         {
             string vazio = string.Empty;
 
-            new AddNotifications<Customer>(_customer).IfNullOrEmpty(x => x.Name).IfNullOrEmpty(vazio, "Vazio");
+            new Notification<Customer>(_customer).IfNullOrEmpty(x => x.Name).IfNullOrEmpty(vazio, "Vazio");
 
             Assert.AreEqual(false, _customer.IsValid());
             Assert.IsTrue(_customer.Notifications.Count() == 2);
@@ -44,7 +45,7 @@ namespace Berger.Global.Notifications.Tests
         [TestCategory("NotificationPattern")]
         public void IfNullOrWhiteSpace()
         {
-            new AddNotifications<Customer>(_customer)
+            new Notification<Customer>(_customer)
                 .IfNullOrWhiteSpace(x => x.Name)
                 .IfNullOrWhiteSpace("", "Empty");
 
@@ -58,7 +59,7 @@ namespace Berger.Global.Notifications.Tests
         {
             _customer.Name = "Robert";
 
-            new AddNotifications<Customer>(_customer)
+            new Notification<Customer>(_customer)
                 .IfNotNullOrEmpty(x => x.Name)
                 .IfNotNullOrEmpty("NotEmpty", "Any");
 
@@ -72,7 +73,7 @@ namespace Berger.Global.Notifications.Tests
         {
             _customer.Age = 10;
 
-            new AddNotifications<Customer>(_customer)
+            new Notification<Customer>(_customer)
                 .IfLowerThan(x => x.Age, 25);
 
             Assert.AreEqual(false, _customer.IsValid());
@@ -84,7 +85,7 @@ namespace Berger.Global.Notifications.Tests
         {
             _customer.Age = 37;
 
-            new AddNotifications<Customer>(_customer).IfGreaterThan(x => x.Age, 25);
+            new Notification<Customer>(_customer).IfGreaterThan(x => x.Age, 25);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -94,7 +95,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfLengthGreaterThan()
         {
             _customer.Name = "Robert";
-            new AddNotifications<Customer>(_customer).IfLengthGreaterThan(x => x.Name, 1);
+            new Notification<Customer>(_customer).IfLengthGreaterThan(x => x.Name, 1);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -104,7 +105,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfLengthLowerThan()
         {
             _customer.Name = "Robert";
-            new AddNotifications<Customer>(_customer).IfLengthLowerThan(x => x.Name, 200);
+            new Notification<Customer>(_customer).IfLengthLowerThan(x => x.Name, 200);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -113,7 +114,7 @@ namespace Berger.Global.Notifications.Tests
         [TestCategory("NotificationPattern")]
         public void IfLengthNoEqual()
         {
-            new AddNotifications<Customer>(_customer).IfLengthNoEqual(x => x.Name, 3);
+            new Notification<Customer>(_customer).IfLengthNoEqual(x => x.Name, 3);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -128,9 +129,9 @@ namespace Berger.Global.Notifications.Tests
             Customer customerNameMaxInvalid = new Customer();
             customerNameMaxInvalid.Name = "Name with more than 10 characters";
 
-            new AddNotifications<Customer>(customerNameEmpty).IfNullOrEmptyOrInvalidLength(x => x.Name, 3, 10);
-            new AddNotifications<Customer>(customerNameMinInvalid).IfNullOrEmptyOrInvalidLength(x => x.Name, 3, 10);
-            new AddNotifications<Customer>(customerNameMaxInvalid).IfNullOrEmptyOrInvalidLength(x => x.Name, 3, 10);
+            new Notification<Customer>(customerNameEmpty).IfNullOrInvalidLength(x => x.Name, 3, 10);
+            new Notification<Customer>(customerNameMinInvalid).IfNullOrInvalidLength(x => x.Name, 3, 10);
+            new Notification<Customer>(customerNameMaxInvalid).IfNullOrInvalidLength(x => x.Name, 3, 10);
 
             Assert.AreEqual(1, customerNameEmpty.Notifications.Count);
             Assert.AreEqual(1, customerNameMinInvalid.Notifications.Count);
@@ -147,9 +148,9 @@ namespace Berger.Global.Notifications.Tests
             Customer customerNameMaxInvalid = new Customer();
             customerNameMaxInvalid.Name = "Name with more than 10 characters";
 
-            new AddNotifications<Customer>(customerNameEmpty).IfNullOrInvalidLength(x => x.Name, 3, 10);
-            new AddNotifications<Customer>(customerNameMinInvalid).IfNullOrInvalidLength(x => x.Name, 3, 10);
-            new AddNotifications<Customer>(customerNameMaxInvalid).IfNullOrInvalidLength(x => x.Name, 3, 10);
+            new Notification<Customer>(customerNameEmpty).IfNullOrInvalidLength(x => x.Name, 3, 10);
+            new Notification<Customer>(customerNameMinInvalid).IfNullOrInvalidLength(x => x.Name, 3, 10);
+            new Notification<Customer>(customerNameMaxInvalid).IfNullOrInvalidLength(x => x.Name, 3, 10);
 
             Assert.AreEqual(1, customerNameEmpty.Notifications.Count);
             Assert.AreEqual(1, customerNameMinInvalid.Notifications.Count);
@@ -161,7 +162,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotEmail()
         {
             _customer.Name = "This is not an e-mail";
-            new AddNotifications<Customer>(_customer).IfNotEmail(x => x.Name);
+            new Notification<Customer>(_customer).IfNotEmail(x => x.Name);
             Assert.AreEqual(false, _customer.IsValid());
         }
 
@@ -170,7 +171,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotUrl()
         {
             _customer.Name = "This is not an URL";
-            new AddNotifications<Customer>(_customer).IfNotUrl(x => x.Name);
+            new Notification<Customer>(_customer).IfNotUrl(x => x.Name);
             Assert.AreEqual(false, _customer.IsValid());
         }
 
@@ -183,8 +184,8 @@ namespace Berger.Global.Notifications.Tests
             customer10.Age = 10;
             customer11.Age = 11;
 
-            new AddNotifications<Customer>(customer10).IfGreaterOrEqualsThan(x => x.Age, 10);
-            new AddNotifications<Customer>(customer11).IfGreaterOrEqualsThan(x => x.Age, 10);
+            new Notification<Customer>(customer10).IfGreaterOrEqualsThan(x => x.Age, 10);
+            new Notification<Customer>(customer11).IfGreaterOrEqualsThan(x => x.Age, 10);
             Assert.AreEqual(false, customer10.IsValid());
             Assert.AreEqual(false, customer11.IsValid());
         }
@@ -201,8 +202,8 @@ namespace Berger.Global.Notifications.Tests
             customer10.CreationDate = now;
             customer11.CreationDate = now.AddDays(1);
 
-            new AddNotifications<Customer>(customer10).IfGreaterOrEqualsThan(x => x.CreationDate, now);
-            new AddNotifications<Customer>(customer11).IfGreaterOrEqualsThan(x => x.CreationDate, now);
+            new Notification<Customer>(customer10).IfGreaterOrEqualsThan(x => x.CreationDate, now);
+            new Notification<Customer>(customer11).IfGreaterOrEqualsThan(x => x.CreationDate, now);
             Assert.AreEqual(false, customer10.IsValid());
             Assert.AreEqual(false, customer11.IsValid());
         }
@@ -217,8 +218,8 @@ namespace Berger.Global.Notifications.Tests
             customer10.Age = 10;
             customer09.Age = 09;
 
-            new AddNotifications<Customer>(customer10).IfLowerOrEqualsThan(x => x.Age, 10);
-            new AddNotifications<Customer>(customer09).IfLowerOrEqualsThan(x => x.Age, 10);
+            new Notification<Customer>(customer10).IfLowerOrEqualsThan(x => x.Age, 10);
+            new Notification<Customer>(customer09).IfLowerOrEqualsThan(x => x.Age, 10);
 
             Assert.AreEqual(false, customer10.IsValid());
             Assert.AreEqual(false, customer09.IsValid());
@@ -237,8 +238,8 @@ namespace Berger.Global.Notifications.Tests
             customer11.CreationDate = now.AddDays(-1);
 
 
-            new AddNotifications<Customer>(customer10).IfLowerOrEqualsThan(x => x.CreationDate, now);
-            new AddNotifications<Customer>(customer11).IfLowerOrEqualsThan(x => x.CreationDate, now);
+            new Notification<Customer>(customer10).IfLowerOrEqualsThan(x => x.CreationDate, now);
+            new Notification<Customer>(customer11).IfLowerOrEqualsThan(x => x.CreationDate, now);
 
             Assert.AreEqual(false, customer10.IsValid());
             Assert.AreEqual(false, customer11.IsValid());
@@ -250,7 +251,7 @@ namespace Berger.Global.Notifications.Tests
         {
             _customer.Age = 10;
 
-            new AddNotifications<Customer>(_customer).IfNotRange(x => x.Age, 11, 21);
+            new Notification<Customer>(_customer).IfNotRange(x => x.Age, 11, 21);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -262,7 +263,7 @@ namespace Berger.Global.Notifications.Tests
             DateTime now = DateTime.Now;
             _customer.CreationDate = now;
 
-            new AddNotifications<Customer>(_customer).IfNotRange(x => x.CreationDate, now.AddMinutes(1), now.AddDays(1));
+            new Notification<Customer>(_customer).IfNotRange(x => x.CreationDate, now.AddMinutes(1), now.AddDays(1));
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -273,7 +274,7 @@ namespace Berger.Global.Notifications.Tests
         {
             _customer.Age = 10;
 
-            new AddNotifications<Customer>(_customer).IfRange(x => x.Age, 05, 21);
+            new Notification<Customer>(_customer).IfRange(x => x.Age, 05, 21);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -285,7 +286,7 @@ namespace Berger.Global.Notifications.Tests
             DateTime now = DateTime.Now;
             _customer.CreationDate = now;
 
-            new AddNotifications<Customer>(_customer).IfNotRange(x => x.CreationDate, DateTime.Now.AddDays(1), DateTime.Now.AddDays(1));
+            new Notification<Customer>(_customer).IfNotRange(x => x.CreationDate, DateTime.Now.AddDays(1), DateTime.Now.AddDays(1));
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -295,7 +296,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotContains()
         {
             _customer.Name = "Rafael";
-            new AddNotifications<Customer>(_customer).IfNotContains(x => x.Name, "Robert");
+            new Notification<Customer>(_customer).IfNotContains(x => x.Name, "Robert");
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -305,7 +306,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfContains()
         {
             _customer.Name = "Rafael";
-            new AddNotifications<Customer>(_customer).IfContains(x => x.Name, "Rafael");
+            new Notification<Customer>(_customer).IfContains(x => x.Name, "Rafael");
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -314,7 +315,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotAreEquals()
         {
             _customer.Name = "Rafael";
-            new AddNotifications<Customer>(_customer).IfNotAreEquals(x => x.Name, "Robert");
+            new Notification<Customer>(_customer).IfNotAreEquals(x => x.Name, "Robert");
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -324,7 +325,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfAreEquals()
         {
             _customer.Name = "Rafael";
-            new AddNotifications<Customer>(_customer).IfAreEquals(x => x.Name, "Rafael");
+            new Notification<Customer>(_customer).IfAreEquals(x => x.Name, "Rafael");
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -334,7 +335,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfTrue()
         {
             _customer.Active = true;
-            new AddNotifications<Customer>(_customer).IfTrue(x => x.Active);
+            new Notification<Customer>(_customer).IfTrue(x => x.Active);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -344,7 +345,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfFalse()
         {
             _customer.Active = false;
-            new AddNotifications<Customer>(_customer).IfFalse(x => x.Active);
+            new Notification<Customer>(_customer).IfFalse(x => x.Active);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -354,7 +355,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotCpf()
         {
             _customer.Cpf = "0000000000";
-            new AddNotifications<Customer>(_customer).IfNotCpf(x => x.Cpf);
+            new Notification<Customer>(_customer).IfNotCpf(x => x.Cpf);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -364,7 +365,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotCnpj()
         {
             _customer.Cnpj = "00000000000";
-            new AddNotifications<Customer>(_customer).IfNotCnpj(x => x.Cnpj);
+            new Notification<Customer>(_customer).IfNotCnpj(x => x.Cnpj);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -374,7 +375,27 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotGuid()
         {
             _customer.Name = "Invalid Guid";
-            new AddNotifications<Customer>(_customer).IfNotGuid(x => x.Name);
+
+            new Notification<Customer>(_customer).IfNotGuid(x => x.Name);
+
+            Assert.AreEqual(false, _customer.IsValid());
+        }
+
+        [TestMethod]
+        [TestCategory("NotificationPattern")]
+        public void IfCustom()
+        {
+            new Notification<Customer>(_customer).CustomCreate("Customer", "This is a custom notification");
+
+            Assert.AreEqual(false, _customer.IsValid());
+        }
+
+        [TestMethod]
+        [TestCategory("NotificationPattern")]
+        public void IfInvalidContract()
+        {
+            new Notification<Customer>(_customer).IfInvalidContract(_customer, new CustomerContract());
+            Assert.IsTrue(_customer.Notifications.Any(x => x.Message.Equals("Name could not be empty")), "Contract message error is different");
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -383,17 +404,17 @@ namespace Berger.Global.Notifications.Tests
         [TestCategory("NotificationPattern")]
         public void IfCollectionIsNullOrEmpty()
         {
-            new AddNotifications<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIEnumerable);
-            new AddNotifications<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIList);
-            new AddNotifications<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersICollection);
+            new Notification<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIEnumerable);
+            new Notification<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIList);
+            new Notification<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersICollection);
 
             _customer.CustomersIEnumerable = new List<Customer>().AsEnumerable();
             _customer.CustomersIList = new List<Customer>();
             _customer.CustomersICollection = new List<Customer>();
 
-            new AddNotifications<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIEnumerable);
-            new AddNotifications<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIList);
-            new AddNotifications<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersICollection);
+            new Notification<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIEnumerable);
+            new Notification<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersIList);
+            new Notification<Customer>(_customer).IfCollectionIsNullOrEmpty(x => x.CustomersICollection);
 
             Assert.AreEqual(false, _customer.IsValid());
             Assert.AreEqual(true, _customer.Notifications.Count() == 6);
@@ -405,7 +426,7 @@ namespace Berger.Global.Notifications.Tests
         {
             _customer.Age = 0;
 
-            new AddNotifications<Customer>(_customer).IfEqualsZero(x => x.Age);
+            new Notification<Customer>(_customer).IfEqualsZero(x => x.Age);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -414,7 +435,7 @@ namespace Berger.Global.Notifications.Tests
         [TestCategory("NotificationPattern")]
         public void IfNull()
         {
-            new AddNotifications<Customer>(_customer).IfNull(x => x.Dependents);
+            new Notification<Customer>(_customer).IfNull(x => x.Dependents);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -423,7 +444,7 @@ namespace Berger.Global.Notifications.Tests
         [TestCategory("NotificationPattern")]
         public void IfNull_Object()
         {
-            new AddNotifications<Customer>(_customer).IfNull(x => x.PropriedadeObject);
+            new Notification<Customer>(_customer).IfNull(x => x.PropriedadeObject);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -433,7 +454,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotNull()
         {
             _customer.Dependents = 2;
-            new AddNotifications<Customer>(_customer).IfNotNull(x => x.Dependents);
+            new Notification<Customer>(_customer).IfNotNull(x => x.Dependents);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -445,7 +466,7 @@ namespace Berger.Global.Notifications.Tests
             _customer.Dependents = 2;
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            new AddNotifications<Customer>(_customer).IfNotNull(x => x.Dependents);
+            new Notification<Customer>(_customer).IfNotNull(x => x.Dependents);
 
             Assert.AreEqual(false, _customer.IsValid());
 
@@ -458,7 +479,7 @@ namespace Berger.Global.Notifications.Tests
         public void IfNotDate()
         {
             _customer.Name = "Invalid Date";
-            new AddNotifications<Customer>(_customer).IfNotDate(x => x.Name);
+            new Notification<Customer>(_customer).IfNotDate(x => x.Name);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -470,7 +491,7 @@ namespace Berger.Global.Notifications.Tests
             Gender gender = (Gender)0;
             _customer.Gender = gender;
 
-            new AddNotifications<Customer>(_customer).IfEnumInvalid(x => x.Gender);
+            new Notification<Customer>(_customer).IfEnumInvalid(x => x.Gender);
 
             Assert.AreEqual(false, _customer.IsValid());
         }
@@ -487,7 +508,7 @@ namespace Berger.Global.Notifications.Tests
                 Age = 36
             };
 
-            new AddNotifications<Customer>(customer).IfNull(request.Name, "Name");
+            new Notification<Customer>(customer).IfNull(request.Name, "Name");
 
             Assert.IsTrue(customer.IsInvalid());
         }

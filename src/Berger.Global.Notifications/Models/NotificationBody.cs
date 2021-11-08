@@ -2,15 +2,15 @@
 
 namespace Berger.Global.Notifications
 {
-    public class Notification
+    public class NotificationBody
     {
         #region Constructors
-        public Notification(string property, string message)
+        public NotificationBody(string property, string message)
         {
             Message = message;
             Property = property;
         }
-        public Notification(string property, string message, string value)
+        public NotificationBody(string property, string message, string value)
         {
             Property = property;
             Message = message;

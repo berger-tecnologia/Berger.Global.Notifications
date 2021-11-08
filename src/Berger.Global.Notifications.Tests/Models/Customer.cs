@@ -5,9 +5,7 @@ namespace Berger.Global.Notifications.Tests.Models
 {
     public class Customer : Notifiable
     {
-        public Customer()
-        {
-        }
+        #region Properties
         public string Name { get; set; }
         public int Age { get; set; }
         public DateTime CreationDate { get; set; }
@@ -20,6 +18,7 @@ namespace Berger.Global.Notifications.Tests.Models
         public IEnumerable<Customer> CustomersIEnumerable { get; set; }
         public ICollection<Customer> CustomersICollection { get; set; }
         public Gender Gender { get; set; }
+        #endregion
     }
 
     public enum Gender

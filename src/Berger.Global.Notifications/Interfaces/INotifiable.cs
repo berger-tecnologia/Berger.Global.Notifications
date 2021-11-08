@@ -5,7 +5,7 @@ namespace Berger.Global.Notifications.Interfaces
 {
     public interface INotifiable : IDisposable
     {
-        IReadOnlyCollection<Notification> Notifications { get; }
+        IReadOnlyCollection<NotificationBody> Notifications { get; }
 
         /// <summary>
         /// Adiciona uma notificação
@@ -18,12 +18,12 @@ namespace Berger.Global.Notifications.Interfaces
         /// Adiciona uma notificação
         /// </summary>
         /// <param name="notification">Objeto de notificação que deseja adicionar</param>
-        void AddNotification(Notification notification);
+        void AddNotification(NotificationBody notification);
         /// <summary>
         /// Adiciona uma lista de notificações
         /// </summary>
         /// <param name="notifications">Lista de notificações que deseja adicionar</param>
-        void AddNotifications(IReadOnlyCollection<Notification> notifications);
+        void AddNotifications(IReadOnlyCollection<NotificationBody> notifications);
 
         /// <summary>
         /// Adiciona uma coleção de objetos notificaveis na classe principal
@@ -34,13 +34,13 @@ namespace Berger.Global.Notifications.Interfaces
         /// Adiciona uma lista de notificações
         /// </summary>
         /// <param name="notifications">Lista de notificações que deseja adicionar</param>
-        void AddNotifications(IList<Notification> notifications);
+        void AddNotifications(IList<NotificationBody> notifications);
 
         /// <summary>
         /// Adiciona uma lista de notificações
         /// </summary>
         /// <param name="notifications">Lista de notificações que deseja adicionar</param>
-        void AddNotifications(ICollection<Notification> notifications);
+        void AddNotifications(ICollection<NotificationBody> notifications);
         /// <summary>
         /// Verifica se o objeto notificável é valido
         /// </summary>
