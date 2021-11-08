@@ -4,6 +4,6 @@ namespace Berger.Global.Notifications.Interfaces
 {
     public interface INotification
     {
-        List<Notification> Get();
+        List<NotificationBody> Get();
     }
 }
