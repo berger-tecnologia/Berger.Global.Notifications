@@ -17,7 +17,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         public override void Dispose()
         {
         }
-
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void GetBasicNotification()
@@ -28,6 +28,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.IsTrue(_notification.IsInvalid());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNullOrEmpty()
@@ -43,6 +44,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.IsTrue(_notification.Count() == 2);
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNullOrWhiteSpace()
@@ -56,6 +58,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.IsTrue(_notification.Count() == 2);
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotNullOrEmpty()
@@ -69,6 +72,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.IsTrue(_notification.Count() == 2);
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfLowerThan()
@@ -81,6 +85,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfGreaterThan()
@@ -93,6 +98,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfLengthGreaterThan()
@@ -105,6 +111,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfLengthLowerThan()
@@ -116,6 +123,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfLengthNoEqual()
@@ -126,6 +134,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNullOrEmptyOrInvalidLength()
@@ -148,11 +157,10 @@ namespace Berger.Global.Notifications.Tests.Patterns
             _notification_3.IfNullOrInvalidLength(x => x.Name, 3, 10);
 
             Assert.AreEqual(1, _notification_1.Count());
-
             Assert.AreEqual(1, _notification_2.Count());
-
             Assert.AreEqual(1, _notification_3.Count());
         }
+
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNullOrOrInvalidLength()
@@ -180,6 +188,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(1, _notification_3.Count());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotEmail()
@@ -248,6 +257,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
             Assert.AreEqual(false, _notification_10.IsValid());
             Assert.AreEqual(false, _notification_11.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfLowerOrEqualsThan()
@@ -302,6 +312,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotRange_Date()
@@ -407,6 +418,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfFalse()
@@ -419,6 +431,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotCpf()
@@ -431,6 +444,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotCnpj()
@@ -443,6 +457,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotGuid()
@@ -455,6 +470,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfCustom()
@@ -487,6 +503,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
             Assert.AreEqual(false, _notification.IsValid());
             Assert.AreEqual(true, _notification.Count() == 6);
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfEqualsZero()
@@ -499,6 +516,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNull()
@@ -509,6 +527,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNull_Object()
@@ -519,6 +538,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotNull()
@@ -531,6 +551,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void ShouldNotificateInEnglish()
@@ -547,6 +568,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
             Assert.IsTrue(_notification.Count() == 1);
             Assert.IsTrue(_notification.Messages.Any(x => x.Message.Equals("Field Dependents should be equals to null.")), "É esperado uma mensagem no idioma ingles");
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfNotDate()
@@ -559,6 +581,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void IfEnumInvalid()
@@ -573,6 +596,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
 
             Assert.AreEqual(false, _notification.IsValid());
         }
+        
         [TestMethod]
         [TestCategory("NotificationPattern")]
         public void AddNotificationIfNull()
