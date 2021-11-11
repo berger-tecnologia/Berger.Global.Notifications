@@ -6,7 +6,7 @@ using Berger.Global.Notifications.Extensions;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
         /// <summary>
         /// Dada uma string, adicione uma notificação se for nula ou vazia
@@ -14,7 +14,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se for nula ou vazia</returns>
-        public void IfNullOrEmpty(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNullOrEmpty<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -29,7 +29,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se for nula ou vazia ou com espaços em branco</returns>
-        public void IfNullOrWhiteSpace(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNullOrWhiteSpace<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -44,7 +44,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for nula</returns>
-        public void IfNotNullOrEmpty(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotNullOrEmpty<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -59,7 +59,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se for nula ou vazia ou com espaços em branco ou seu tamanho seja invalido</returns>
-        public void IfNullOrInvalidLength(T model, Expression<Func<T, string>> selector, int min, int max, string message = "")
+        public void IfNullOrInvalidLength<T>(T model, Expression<Func<T, string>> selector, int min, int max, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -75,7 +75,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="min">Minimum Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se seu comprimento for menor que o parâmetro min</returns>
-        public void IfLengthLowerThan(T model, Expression<Func<T, string>> selector, int min, string message = "")
+        public void IfLengthLowerThan<T>(T model, Expression<Func<T, string>> selector, int min, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -91,7 +91,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="min">Minimum Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se seu comprimento for maior que o parâmetro max</returns>
-        public void IfLengthGreaterThan(T model, Expression<Func<T, string>> selector, int max, string message = "")
+        public void IfLengthGreaterThan<T>(T model, Expression<Func<T, string>> selector, int max, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -107,7 +107,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="length">Especific Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se seu comprimento for diferente do parâmetro length</returns>
-        public void IfLengthNoEqual(T model, Expression<Func<T, string>> selector, int length, string message = "")
+        public void IfLengthNoEqual<T>(T model, Expression<Func<T, string>> selector, int length, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -122,7 +122,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for um endereço de e-mail válido</returns>
-        public void IfNotEmail(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotEmail<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -137,7 +137,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for um URL válida</returns>
-        public void IfNotUrl(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotUrl<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -154,7 +154,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="b">Higher value</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se ela não contiver um texto</returns>
-        public void IfNotContains(T model, Expression<Func<T, string>> selector, string text, string message = "")
+        public void IfNotContains<T>(T model, Expression<Func<T, string>> selector, string text, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -171,7 +171,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="b">Higher value</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se ela contiver um texto</returns>
-        public void IfContains(T model, Expression<Func<T, string>> selector, string text, string message = "")
+        public void IfContains<T>(T model, Expression<Func<T, string>> selector, string text, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -186,7 +186,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for um cpf válido</returns>
-        public void IfNotCpf(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotCpf<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var cpf = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -245,7 +245,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for um Cnpj válido</returns>
-        public void IfNotCnpj(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotCnpj<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var cnpj = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -302,7 +302,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for Guid</returns>
-        public void IfNotGuid(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotGuid<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var data = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -321,7 +321,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for uma data válida</returns>
-        public void IfNotDate(T model, Expression<Func<T, string>> selector, string message = "")
+        public void IfNotDate<T>(T model, Expression<Func<T, string>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -339,7 +339,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for igual a</returns>
-        public void IfNotAreEquals(T model, Expression<Func<T, string>> selector, string text, string message = "")
+        public void IfNotAreEquals<T>(T model, Expression<Func<T, string>> selector, string text, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -354,7 +354,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se for igual a</returns>
-        public void IfAreEquals(T model, Expression<Func<T, string>> selector, string text, string message = "")
+        public void IfAreEquals<T>(T model, Expression<Func<T, string>> selector, string text, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -371,7 +371,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="objectName">Nome da propriedade ou objeto que representa a informação</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for um endereço de e-mail válido</returns>
-        public void IfNotMatch(T model, Expression<Func<T, string>> selector, string regex, string message = "")
+        public void IfNotMatch<T>(T model, Expression<Func<T, string>> selector, string regex, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;

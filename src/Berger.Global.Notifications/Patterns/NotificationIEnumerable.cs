@@ -8,7 +8,7 @@ using Berger.Global.Notifications.Extensions;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
         /// <summary>
         /// Dada uma coleção, adicione uma notificação se for nula
@@ -16,7 +16,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma coleção, adicione uma notificação se for nula</returns>
-        public void IfCollectionIsNull(T model, Expression<Func<T, IEnumerable>> selector, string message = "")
+        public void IfCollectionIsNull<T>(T model, Expression<Func<T, IEnumerable>> selector, string message = "")
         {
             IEnumerable colectionValue = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -33,7 +33,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma coleção, adicione uma notificação se for nula ou não tenha itens</returns>
-        public void IfCollectionIsNullOrEmpty(T model, Expression<Func<T, IEnumerable<T>>> selector, string message = "")
+        public void IfCollectionIsNullOrEmpty<T>(T model, Expression<Func<T, IEnumerable<T>>> selector, string message = "")
         {
             IEnumerable<T> colectionValue = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -67,7 +67,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="objectName">Nome da propriedade ou objeto que representa a informação</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma coleção, adicione uma notificação se for nula ou não tenha itens</returns>
-        public void IfCollectionIsNullOrEmpty(IEnumerable<T> val, string objectName, string message = "")
+        public void IfCollectionIsNullOrEmpty<T>(IEnumerable<T> val, string objectName, string message = "")
         {
             if (val == null || val.ToList().Count <= 0)
             {

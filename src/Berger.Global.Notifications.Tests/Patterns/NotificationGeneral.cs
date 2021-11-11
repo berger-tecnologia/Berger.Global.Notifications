@@ -22,7 +22,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void GetBasicNotification()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfNullOrEmpty(_customer, x => x.Name);
 
@@ -33,7 +33,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNullOrEmpty()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             string vazio = string.Empty;
 
@@ -49,7 +49,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNullOrWhiteSpace()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfNullOrWhiteSpace(_customer, x => x.Name);
             _notification.IfNullOrWhiteSpace("", "Empty");
@@ -63,7 +63,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotNullOrEmpty()
         {
-            _customer.Name = "Robert"; var _notification = CreateFactory<Customer>();
+            _customer.Name = "Robert"; var _notification = Create();
 
             _notification.IfNotNullOrEmpty(_customer, x => x.Name);
             _notification.IfNotNullOrEmpty("NotEmpty", "Any");
@@ -77,7 +77,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfLowerThan()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Age = 10; 
 
@@ -90,7 +90,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfGreaterThan()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Age = 37; 
 
@@ -103,7 +103,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfLengthGreaterThan()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Robert"; 
 
@@ -116,7 +116,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfLengthLowerThan()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
             _customer.Name = "Robert"; 
 
             _notification.IfLengthLowerThan(_customer, x => x.Name, 200);
@@ -128,7 +128,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfLengthNoEqual()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfLengthNoEqual(_customer, x => x.Name, 3);
 
@@ -147,13 +147,13 @@ namespace Berger.Global.Notifications.Tests.Patterns
             var customerNameMaxInvalid = new Customer(); 
             customerNameMaxInvalid.Name = "Name with more than 10 characters";
 
-            var _notification_1 = CreateFactory<Customer>();
+            var _notification_1 = Create();
             _notification_1.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10);
 
-            var _notification_2 = CreateFactory<Customer>();
+            var _notification_2 = Create();
             _notification_2.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10);
 
-            var _notification_3 = CreateFactory<Customer>();
+            var _notification_3 = Create();
             _notification_3.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10);
 
             Assert.AreEqual(1, _notification_1.Count());
@@ -173,13 +173,13 @@ namespace Berger.Global.Notifications.Tests.Patterns
             Customer customerNameMaxInvalid = new Customer(); 
             customerNameMaxInvalid.Name = "Name with more than 10 characters";
 
-            var _notification_1 = CreateFactory<Customer>();
+            var _notification_1 = Create();
             _notification_1.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10);
 
-            var _notification_2 = CreateFactory<Customer>();
-            _notification_2.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10); var _notification = CreateFactory<Customer>();
+            var _notification_2 = Create();
+            _notification_2.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10); var _notification = Create();
 
-            var _notification_3 = CreateFactory<Customer>();
+            var _notification_3 = Create();
             _notification_3.IfNullOrInvalidLength(_customer, x => x.Name, 3, 10);
 
             Assert.AreEqual(1, _notification_1.Count());
@@ -191,7 +191,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotEmail()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
             _customer.Name = "This is not an e-mail"; 
 
             _notification.IfNotEmail(_customer, x => x.Name);
@@ -203,7 +203,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotUrl()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "This is not an URL"; 
 
@@ -222,8 +222,8 @@ namespace Berger.Global.Notifications.Tests.Patterns
             customer10.Age = 10;
             customer11.Age = 11;
 
-            var _notification_10 = CreateFactory<Customer>();
-            var _notification_11 = CreateFactory<Customer>();
+            var _notification_10 = Create();
+            var _notification_11 = Create();
 
             _notification_10.IfGreaterOrEqualsThan(customer10, x => x.Age, 10);
             _notification_11.IfGreaterOrEqualsThan(customer11, x => x.Age, 10);
@@ -244,8 +244,8 @@ namespace Berger.Global.Notifications.Tests.Patterns
             customer10.CreationDate = now; 
             customer11.CreationDate = now.AddDays(1);
 
-            var _notification_10 = CreateFactory<Customer>();
-            var _notification_11 = CreateFactory<Customer>();
+            var _notification_10 = Create();
+            var _notification_11 = Create();
 
             _notification_10.IfGreaterOrEqualsThan(customer10, x => x.CreationDate, now);
             _notification_11.IfGreaterOrEqualsThan(customer11, x => x.CreationDate, now);
@@ -264,8 +264,8 @@ namespace Berger.Global.Notifications.Tests.Patterns
             customer10.Age = 10; 
             customer09.Age = 09;
 
-            var _notification_10 = CreateFactory<Customer>();
-            var _notification_09 = CreateFactory<Customer>();
+            var _notification_10 = Create();
+            var _notification_09 = Create();
 
             _notification_10.IfLowerOrEqualsThan(_customer, x => x.Age, 10);
             _notification_09.IfLowerOrEqualsThan(_customer, x => x.Age, 10);
@@ -286,8 +286,8 @@ namespace Berger.Global.Notifications.Tests.Patterns
             customer10.CreationDate = now; 
             customer11.CreationDate = now.AddDays(-1);
 
-            var _notification_10 = CreateFactory<Customer>();
-            var _notification_11 = CreateFactory<Customer>();
+            var _notification_10 = Create();
+            var _notification_11 = Create();
 
             _notification_10.IfLowerOrEqualsThan(_customer, x => x.CreationDate, now);
             _notification_11.IfLowerOrEqualsThan(_customer, x => x.CreationDate, now);
@@ -300,7 +300,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotRange()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Age = 10; 
 
@@ -313,7 +313,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotRange_Date()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             DateTime now = DateTime.Now; 
 
@@ -328,7 +328,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfRange()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Age = 10; 
 
@@ -341,7 +341,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfRange_Date()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             DateTime now = DateTime.Now; _customer.CreationDate = now; 
 
@@ -354,7 +354,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotContains()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Rafael"; 
 
@@ -367,7 +367,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfContains()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Rafael"; 
 
@@ -380,7 +380,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotAreEquals()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Rafael"; 
 
@@ -393,7 +393,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfAreEquals()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Rafael"; 
 
@@ -406,7 +406,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfTrue()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Active = true; 
 
@@ -419,7 +419,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfFalse()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Active = false;
 
@@ -432,7 +432,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotCpf()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Cpf = "0000000000"; 
 
@@ -445,7 +445,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotCnpj()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Cnpj = "80288216000134"; 
 
@@ -458,7 +458,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotGuid()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Invalid Guid"; 
 
@@ -471,7 +471,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfCustom()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.CustomCreate("Customer", "This is a custom notification");
 
@@ -482,7 +482,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfCollectionIsNullOrEmpty()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIEnumerable);
             _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIList);
@@ -504,7 +504,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfEqualsZero()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Age = 0; 
 
@@ -517,7 +517,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNull()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfNull(_customer, x => x.Dependents);
 
@@ -528,7 +528,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNull_Object()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfNull(_customer, x => x.AnyObject);
 
@@ -539,7 +539,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotNull()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Dependents = 2; 
 
@@ -552,7 +552,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void ShouldNotificateInEnglish()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Dependents = 2; 
 
@@ -569,7 +569,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfNotDate()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _customer.Name = "Invalid Date"; 
 
@@ -582,7 +582,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfEnumInvalid()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             Gender gender = (Gender)0; 
             
@@ -605,7 +605,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
                 Age = 36 
             };
 
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfNull(request.Name, "Name");
 

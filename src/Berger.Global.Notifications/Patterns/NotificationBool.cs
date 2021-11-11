@@ -5,7 +5,7 @@ using Berger.Global.Notifications.Extensions;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
         /// <summary>
         /// Dada uma bool, adicione uma notificação se for verdadeira
@@ -13,7 +13,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma bool, adicione uma notificação se for verdadeira</returns>
-        public void IfTrue(T model, Expression<Func<T, bool>> selector, string message = "")
+        public void IfTrue<T>(T model, Expression<Func<T, bool>> selector, string message = "")
         {
             var data = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -28,7 +28,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma bool, adicione uma notificação se for falso</returns>
-        public void IfFalse(T model, Expression<Func<T, bool>> selector, string message = "")
+        public void IfFalse<T>(T model, Expression<Func<T, bool>> selector, string message = "")
         {
             var data = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;

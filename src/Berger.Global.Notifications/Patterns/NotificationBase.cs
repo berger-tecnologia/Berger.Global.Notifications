@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
         #region Methods
         public int Count() => _notifications.Count();

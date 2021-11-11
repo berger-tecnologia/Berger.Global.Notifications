@@ -16,7 +16,7 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfInvalidContract()
         {
-            var _notification = CreateFactory<Customer>();
+            var _notification = Create();
 
             _notification.IfInvalidContract(_customer, new CustomerContract());
             

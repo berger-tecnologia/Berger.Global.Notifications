@@ -5,7 +5,7 @@ using Berger.Global.Notifications.Extensions;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
         /// <summary>
         /// Dado um Enum, adiciona notificação caso seu valor não esteja definido dentro do próprio Enum
@@ -13,7 +13,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um Enum, adiciona notificação caso seu valor não esteja definido dentro do próprio Enum</returns>
-        public void IfEnumInvalid(T model, Expression<Func<T, System.Enum>> selector, string message = "")
+        public void IfEnumInvalid<T>(T model, Expression<Func<T, System.Enum>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = string.Empty;

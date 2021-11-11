@@ -2,9 +2,9 @@
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
-        public void IfInvalidContract(T model, AbstractValidator<T> validator)
+        public void IfInvalidContract<T>(T model, AbstractValidator<T> validator)
         {
             var results = validator.Validate(model);
 

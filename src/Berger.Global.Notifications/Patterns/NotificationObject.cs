@@ -5,7 +5,7 @@ using Berger.Global.Notifications.Extensions;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> 
+    public partial class Notification 
     {
         /// <summary>
         /// Dada um objeto, adicione uma notificação se for igual null
@@ -14,7 +14,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto, adicione uma notificação se for igual null</returns>
-        public void IfNull(T model, Expression<Func<T, object>> selector, string message = "")
+        public void IfNull<T>(T model, Expression<Func<T, object>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
@@ -30,7 +30,7 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto, adicione uma notificação se não for igual null</returns>
-        public void IfNotNull(T model, Expression<Func<T, object>> selector, string message = "")
+        public void IfNotNull<T>(T model, Expression<Func<T, object>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
