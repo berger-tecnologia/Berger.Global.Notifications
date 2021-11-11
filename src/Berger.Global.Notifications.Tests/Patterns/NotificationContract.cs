@@ -16,9 +16,9 @@ namespace Berger.Global.Notifications.Tests.Patterns
         [TestCategory("NotificationPattern")]
         public void IfInvalidContract()
         {
-            var _notification = CreateFactory(_customer);
+            var _notification = CreateFactory<Customer>();
 
-            _notification.IfInvalidContract(new CustomerContract());
+            _notification.IfInvalidContract(_customer, new CustomerContract());
             
             Assert.IsTrue(_notification.Messages.Any(x => x.Message.Equals("Name could not be empty")), "Contract message error is different");
         }

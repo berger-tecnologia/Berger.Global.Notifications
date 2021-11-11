@@ -14,9 +14,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="min">Minimum Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um double, adicione uma notificação se seu valor for menor que o parâmetro min</returns>
-        public void IfLowerThan(Expression<Func<T, double>> selector, double min, string message = "")
+        public void IfLowerThan(T model, Expression<Func<T, double>> selector, double min, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val < min)
@@ -32,9 +32,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="min">Minimum Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um double, adicione uma notificação se seu valor for maior que o parâmetro max</returns>
-        public void IfGreaterThan(Expression<Func<T, double>> selector, double max, string message = "")
+        public void IfGreaterThan(T model, Expression<Func<T, double>> selector, double max, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val > max)
@@ -50,9 +50,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="number">Number to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se for maior ou igual ao parametro passado</returns>
-        public void IfGreaterOrEqualsThan(Expression<Func<T, double>> selector, double number, string message = "")
+        public void IfGreaterOrEqualsThan(T model, Expression<Func<T, double>> selector, double number, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val >= number)
@@ -68,9 +68,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="number">Number to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se for menor ou igual ao parametro passado</returns>
-        public void IfLowerOrEqualsThan(Expression<Func<T, double>> selector, double number, string message = "")
+        public void IfLowerOrEqualsThan(T model, Expression<Func<T, double>> selector, double number, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val <= number)
@@ -87,9 +87,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="b">Higher value</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se não estiver entre alguns dois valores</returns>
-        public void IfNotRange(Expression<Func<T, double>> selector, double a, double b, string message = "")
+        public void IfNotRange(T model, Expression<Func<T, double>> selector, double a, double b, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val < a || val > b)
@@ -106,9 +106,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="b">Higher value</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se estiver entre alguns dois valores</returns>
-        public void IfRange(Expression<Func<T, double>> selector, double a, double b, string message = "")
+        public void IfRange(T model, Expression<Func<T, double>> selector, double a, double b, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val > a && val < b)
@@ -124,9 +124,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for igual a</returns>
-        public void IfNotAreEquals(Expression<Func<T, double>> selector, double value, string message = "")
+        public void IfNotAreEquals(T model, Expression<Func<T, double>> selector, double value, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val != value)
@@ -142,15 +142,13 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se for igual a</returns>
-        public void IfAreEquals(Expression<Func<T, double>> selector, double value, string message = "")
+        public void IfAreEquals(T model, Expression<Func<T, double>> selector, double value, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val == value)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfAreEquals.ToFormat(name, value) : message);
-
-            
         }
 
         /// <summary>
@@ -160,9 +158,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto double, adicione uma notificação se for igual null</returns>
-        public void IfNull(Expression<Func<T, double?>> selector, string message = "")
+        public void IfNull(T model, Expression<Func<T, double?>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val == null)
@@ -178,15 +176,13 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto double, adicione uma notificação se não for igual null</returns>
-        public void IfNotNull(Expression<Func<T, double?>> selector, string message = "")
+        public void IfNotNull(T model, Expression<Func<T, double?>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val != null)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotNull.ToFormat(name) : message);
-
-            
         }
 
         /// <summary>
@@ -201,8 +197,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val < min)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfLowerThan.ToFormat(objectName, min) : message);
-
-            
         }
 
         /// <summary>
@@ -217,8 +211,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val > max)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfGreaterThan.ToFormat(objectName, max) : message);
-
-            
         }
 
         /// <summary>
@@ -233,8 +225,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val >= number)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfGreaterOrEqualsThan.ToFormat(objectName, number) : message);
-
-            
         }
 
         /// <summary>
@@ -249,8 +239,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val <= number)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfLowerOrEqualsThan.ToFormat(objectName, number) : message);
-
-            
         }
 
         /// <summary>
@@ -266,8 +254,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val < a || val > b)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotRange.ToFormat(objectName, a, b) : message);
-
-            
         }
 
         /// <summary>
@@ -283,8 +269,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val > a && val < b)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfRange.ToFormat(objectName, a, b) : message);
-
-            
         }
 
         /// <summary>
@@ -299,8 +283,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val != value)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotAreEquals.ToFormat(objectName, value) : message);
-
-            
         }
 
         /// <summary>
@@ -315,8 +297,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val == value)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfAreEquals.ToFormat(objectName, value) : message);
-
-            
         }
 
         /// <summary>
@@ -330,8 +310,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val == null)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNull.ToFormat(objectName) : message);
-
-            
         }
 
         /// <summary>
@@ -345,8 +323,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             if (val != null)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotNull.ToFormat(objectName) : message);
-
-            
         }
     }
 }

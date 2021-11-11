@@ -7,7 +7,6 @@ namespace Berger.Global.Notifications.Tests.Patterns
     public class NotificationString : BaseConfiguration
     {
         private readonly Customer _customer = new Customer();
-
         public override void Dispose(){ }
     }
 }

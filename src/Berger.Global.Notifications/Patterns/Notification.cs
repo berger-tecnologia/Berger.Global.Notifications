@@ -5,17 +5,14 @@ namespace Berger.Global.Notifications.Patterns
 {
     public partial class Notification<T> : INotification<T> 
     {
-        public readonly T _model;
         public readonly List<NotificationViewModel> _notifications;
         public IReadOnlyCollection<NotificationViewModel> Messages => _notifications;
         public Notification()
         {
             _notifications = new List<NotificationViewModel>();
         }
-
         public Notification(T model)
         {
-            _model = model;
             _notifications = new List<NotificationViewModel>();
         }
     }

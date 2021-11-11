@@ -14,13 +14,13 @@ namespace Berger.Global.Notifications.Tests
         {
         }
 
-        public INotificationFactory<T> CreateFactory<T>(T model) 
+        public INotificationFactory<T> CreateFactory<T>() 
         {
             // Service Configuration
             IServiceCollection services = new ServiceCollection();
 
             // Service Dependencies
-            services.Register(model);
+            services.Register<T>();
 
             // Service Building
             var provider =  services.BuildServiceProvider();

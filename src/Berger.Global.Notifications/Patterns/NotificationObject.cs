@@ -14,9 +14,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto, adicione uma notificação se for igual null</returns>
-        public void IfNull(Expression<Func<T, object>> selector, string message = "")
+        public void IfNull(T model, Expression<Func<T, object>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val == null)
@@ -30,9 +30,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto, adicione uma notificação se não for igual null</returns>
-        public void IfNotNull(Expression<Func<T, object>> selector, string message = "")
+        public void IfNotNull(T model, Expression<Func<T, object>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val != null)

@@ -6,14 +6,20 @@ namespace Berger.Global.Notifications.Ioc
 {
     public static class Bootstrap
     {
-        public static void Register(this IServiceCollection services)
+        public static void Register<T>(this IServiceCollection services)
         {
-            services.AddScoped(typeof(INotificationFactory<>), typeof(NotificationFactory<>));
+            //services.AddScoped(typeof(INotificationFactory<>), typeof(NotificationFactory<>));
+            services.AddScoped<INotificationFactory<T>>(x => new NotificationFactory<T>());
         }
 
-        public static void Register<T>(this IServiceCollection services, T model) 
-        {
-            services.AddScoped<INotificationFactory<T>>(x => new NotificationFactory<T>(model));
-        }
+        //public static void Register(this IServiceCollection services)
+        //{
+        //    services.AddScoped(typeof(INotificationFactory<>), typeof(NotificationFactory<>));
+        //}
+
+        //public static void Register<T>(this IServiceCollection services, T model) 
+        //{
+        //    services.AddScoped<INotificationFactory<T>>(x => new NotificationFactory<T>(model));
+        //}
     }
 }

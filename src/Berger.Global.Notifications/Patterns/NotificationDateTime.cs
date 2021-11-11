@@ -14,9 +14,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="min">Minimum Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um DateTime, adicione uma notificação se seu valor for menor que o parâmetro min</returns>
-        public void IfLowerThan(Expression<Func<T, DateTime>> selector, DateTime min, string message = "")
+        public void IfLowerThan(T model, Expression<Func<T, DateTime>> selector, DateTime min, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val < min)
@@ -30,9 +30,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="min">Minimum Length</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um DateTime, adicione uma notificação se seu valor for maior que o parâmetro max</returns>
-        public void IfGreaterThan(Expression<Func<T, DateTime>> selector, DateTime max, string message = "")
+        public void IfGreaterThan(T model, Expression<Func<T, DateTime>> selector, DateTime max, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val > max)
@@ -46,9 +46,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="number">Number to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se for maior ou igual ao parametro passado</returns>
-        public void IfGreaterOrEqualsThan(Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
+        public void IfGreaterOrEqualsThan(T model, Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val >= date)
@@ -62,9 +62,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="number">Number to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se for menor ou igual ao parametro passado</returns>
-        public void IfLowerOrEqualsThan(Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
+        public void IfLowerOrEqualsThan(T model, Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val <= date)
@@ -80,9 +80,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="b">Higher value</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se não estiver entre alguns dois valores</returns>
-        public void IfNotRange(Expression<Func<T, DateTime>> selector, DateTime a, DateTime b, string message = "")
+        public void IfNotRange(T model, Expression<Func<T, DateTime>> selector, DateTime a, DateTime b, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val < a || val > b)
@@ -97,9 +97,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="b">Higher value</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dado um int, adicione uma notificação se estiver entre alguns dois valores</returns>
-        public void IfRange(Expression<Func<T, DateTime>> selector, DateTime a, DateTime b, string message = "")
+        public void IfRange(T model, Expression<Func<T, DateTime>> selector, DateTime a, DateTime b, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val > a && val < b)
@@ -113,9 +113,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se não for igual a</returns>
-        public void IfNotAreEquals(Expression<Func<T, DateTime>> selector, DateTime value, string message = "")
+        public void IfNotAreEquals(T model, Expression<Func<T, DateTime>> selector, DateTime value, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val != value)
@@ -129,9 +129,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma string, adicione uma notificação se for igual a</returns>
-        public void IfAreEquals(Expression<Func<T, DateTime>> selector, DateTime value, string message = "")
+        public void IfAreEquals(T model, Expression<Func<T, DateTime>> selector, DateTime value, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val == value)
@@ -145,9 +145,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto de data, adicione uma notificação se for igual null</returns>
-        public void IfNull(Expression<Func<T, DateTime>> selector, string message = "")
+        public void IfNull(T model, Expression<Func<T, DateTime>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val == null)
@@ -161,9 +161,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto de data, adicione uma notificação se for igual null</returns>
-        public void IfNull(Expression<Func<T, DateTime?>> selector, string message = "")
+        public void IfNull(T model, Expression<Func<T, DateTime?>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val == null)
@@ -177,9 +177,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto de data, adicione uma notificação se não for igual null</returns>
-        public void IfNotNull(Expression<Func<T, DateTime>> selector, string message = "")
+        public void IfNotNull(T model, Expression<Func<T, DateTime>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val != null)
@@ -193,9 +193,9 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Value to be compared</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada um objeto de data, adicione uma notificação se não for igual null</returns>
-        public void IfNotNull(Expression<Func<T, DateTime?>> selector, string message = "")
+        public void IfNotNull(T model, Expression<Func<T, DateTime?>> selector, string message = "")
         {
-            var val = selector.Compile().Invoke(_model);
+            var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val != null)
