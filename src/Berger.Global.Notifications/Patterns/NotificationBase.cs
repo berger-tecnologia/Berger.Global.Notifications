@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Berger.Global.Notifications.Interfaces;
 
 namespace Berger.Global.Notifications.Patterns
 {
@@ -10,6 +9,8 @@ namespace Berger.Global.Notifications.Patterns
         #region Methods
         public int Count() => _notifications.Count();
         public bool HasNotifications() => _notifications.Any();
+        public bool IsValid() => _notifications == null || _notifications.Count == 0;
+        public bool IsInvalid() => _notifications != null && _notifications.Any();
         public List<NotificationViewModel> Get() => _notifications;
         public void AddNotification(string property, string message)
         {
@@ -27,17 +28,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             _notifications.AddRange(notifications);
         }
-        //public void AddNotifications(params Notifiable[] objects)
-        //{
-        //    foreach (var notifiable in objects)
-        //        _notifications.AddRange(notifiable.Notifications);
-        //}
-        //public void AddNotifications(params IEnumerable<Notifiable>[] objects)
-        //{
-        //    foreach (var notifiables in objects)
-        //        foreach (var notifiable in notifiables)
-        //            _notifications.AddRange(notifiable.Notifications);
-        //}
         public void AddNotifications(IList<NotificationViewModel> notifications)
         {
             _notifications.AddRange(notifications);
@@ -46,8 +36,6 @@ namespace Berger.Global.Notifications.Patterns
         {
             _notifications.AddRange(notifications);
         }
-        public bool IsValid() => _notifications == null || _notifications.Count == 0;
-        public bool IsInvalid() => _notifications != null && _notifications.Any();
         public void ClearNotifications()
         {
             _notifications.Clear();
