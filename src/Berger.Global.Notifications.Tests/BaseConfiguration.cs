@@ -1,6 +1,6 @@
 ﻿using System;
-using Berger.Global.Notifications.Ioc;
 using Microsoft.Extensions.Configuration;
+using Berger.Global.Notifications.Patterns;
 using Berger.Global.Notifications.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +20,7 @@ namespace Berger.Global.Notifications.Tests
             IServiceCollection services = new ServiceCollection();
 
             // Service Dependencies
-            services.Register();
+            services.AddScoped<INotification, Notification>();
 
             // Service Building
             var provider =  services.BuildServiceProvider();
