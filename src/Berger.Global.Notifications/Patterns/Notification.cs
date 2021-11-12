@@ -1,12 +1,15 @@
-﻿namespace Berger.Global.Notifications.Patterns
-{
-    public partial class Notification<T> where T : Notifiable
-    {
-        private readonly T _notifiable;
+﻿using System.Collections.Generic;
+using Berger.Global.Notifications.Interfaces;
 
-        public Notification(T notifiable)
+namespace Berger.Global.Notifications.Patterns
+{
+    public partial class Notification : INotification 
+    {
+        public readonly List<NotificationViewModel> _notifications;
+        public IReadOnlyCollection<NotificationViewModel> Messages => _notifications;
+        public Notification()
         {
-            _notifiable = notifiable;
+            _notifications = new List<NotificationViewModel>();
         }
     }
 }

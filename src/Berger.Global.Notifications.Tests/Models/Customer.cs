@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Berger.Global.Notifications.Tests.Models
 {
-    public class Customer : Notifiable
+    public class Customer
     {
         #region Properties
         public string Name { get; set; }
         public int Age { get; set; }
         public DateTime CreationDate { get; set; }
         public bool Active { get; set; }
-        public object PropriedadeObject { get; set; }
+        public object AnyObject { get; set; }
         public string Cpf { get; set; }
         public string Cnpj { get; set; }
         public int? Dependents { get; set; }
@@ -20,7 +20,6 @@ namespace Berger.Global.Notifications.Tests.Models
         public Gender Gender { get; set; }
         #endregion
     }
-
     public enum Gender
     {
         Male = 1,

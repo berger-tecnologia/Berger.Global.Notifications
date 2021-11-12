@@ -1,12 +1,10 @@
 ﻿namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> where T : Notifiable
+    public partial class Notification 
     {
-        public Notification<T> CustomCreate(string property, string message)
+        public void CustomCreate(string property, string message)
         {
-            _notifiable.AddNotification(property, message);
-
-            return this;
+            AddNotification(property, message);
         }
     }
 }

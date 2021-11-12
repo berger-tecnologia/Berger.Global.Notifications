@@ -5,7 +5,7 @@ using Berger.Global.Notifications.Extensions;
 
 namespace Berger.Global.Notifications.Patterns
 {
-    public partial class Notification<T> where T : Notifiable
+    public partial class Notification 
     {
         /// <summary>
         /// Dada uma bool, adicione uma notificação se for verdadeira
@@ -13,15 +13,13 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma bool, adicione uma notificação se for verdadeira</returns>
-        public Notification<T> IfTrue(Expression<Func<T, bool>> selector, string message = "")
+        public void IfTrue<T>(T model, Expression<Func<T, bool>> selector, string message = "")
         {
-            var data = selector.Compile().Invoke(_notifiable);
+            var data = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (data == true)
-                _notifiable.AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfTrue.ToFormat(name) : message);
-
-            return this;
+                AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfTrue.ToFormat(name) : message);
         }
 
         /// <summary>
@@ -30,15 +28,13 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="val">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma bool, adicione uma notificação se for falso</returns>
-        public Notification<T> IfFalse(Expression<Func<T, bool>> selector, string message = "")
+        public void IfFalse<T>(T model, Expression<Func<T, bool>> selector, string message = "")
         {
-            var data = selector.Compile().Invoke(_notifiable);
+            var data = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (data == false)
-                _notifiable.AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfFalse.ToFormat(name) : message);
-
-            return this;
+                AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfFalse.ToFormat(name) : message);
         }
 
         /// <summary>
@@ -48,12 +44,10 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="objectName">Nome da propriedade ou objeto que representa a informação</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma bool, adicione uma notificação se for verdadeira</returns>
-        public Notification<T> IfTrue(bool val, string objectName, string message = "")
+        public void IfTrue(bool val, string objectName, string message = "")
         {
             if (val == true)
-                _notifiable.AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfTrue.ToFormat(objectName) : message);
-
-            return this;
+                AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfTrue.ToFormat(objectName) : message);
         }
 
         /// <summary>
@@ -63,13 +57,11 @@ namespace Berger.Global.Notifications.Patterns
         /// <param name="objectName">Nome da propriedade ou objeto que representa a informação</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma bool, adicione uma notificação se for falso</returns>
-        
-        public Notification<T> IfFalse(bool val, string objectName, string message = "")
+
+        public void IfFalse(bool val, string objectName, string message = "")
         {
             if (val == false)
-                _notifiable.AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfFalse.ToFormat(objectName) : message);
-
-            return this;
+                AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfFalse.ToFormat(objectName) : message);
         }
     }
 }
