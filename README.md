@@ -1,1 +1,1 @@
-# Berger.Global.Notifications
+# Berger.Extensions.Notification
