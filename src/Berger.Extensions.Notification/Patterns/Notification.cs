@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Berger.Extensions.Notification
+﻿namespace Berger.Extensions.Notification
 {
     public partial class Notification : INotification 
     {

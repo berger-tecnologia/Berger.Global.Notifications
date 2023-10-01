@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Berger.Extensions.Notification
+﻿namespace Berger.Extensions.Notification
 {
     public static class EnumExtension
     {

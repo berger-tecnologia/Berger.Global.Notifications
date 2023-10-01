@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq.Expressions;
-using System.Collections.Generic;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
