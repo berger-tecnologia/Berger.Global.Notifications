@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace Berger.Extensions.Notification.Resources {
-    using System;
     using System.Reflection;
     
     

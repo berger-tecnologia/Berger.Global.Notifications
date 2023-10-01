@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Berger.Extensions.Notification
+﻿namespace Berger.Extensions.Notification
 {
     public class NotificationViewModel
     {
@@ -20,12 +18,12 @@ namespace Berger.Extensions.Notification
 
         #region Properties
         public Guid ID { get; set; }
-        public string Name { get; set; }
-        public string Title { get; set; }
-        public string Property { get; set; }
-        public string Value { get; set; }
-        public string Message { get; set; }
-        public string Code { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Property { get; set; } = string.Empty;
+        public string Value { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
         public int Status { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime? Updated { get; set; }

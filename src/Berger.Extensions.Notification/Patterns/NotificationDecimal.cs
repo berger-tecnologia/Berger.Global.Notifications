@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
@@ -20,8 +19,6 @@ namespace Berger.Extensions.Notification
 
             if (val < min)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfLowerThan.ToFormat(name, min) : message);
-
-            
         }
 
         /// <summary>
