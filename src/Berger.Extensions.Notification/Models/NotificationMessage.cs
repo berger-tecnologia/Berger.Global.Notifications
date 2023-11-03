@@ -1,18 +1,20 @@
-﻿namespace Berger.Extensions.Notification
+﻿using Berger.Extensions.Abstractions;
+
+namespace Berger.Extensions.Notification
 {
-    public class NotificationViewModel
+    public class NotificationMessage : INotificationMessage
     {
         #region Constructors
-        public NotificationViewModel(string property, string message)
+        public NotificationMessage(string property, string message)
         {
             Message = message;
             Property = property;
         }
-        public NotificationViewModel(string property, string message, string value)
+        public NotificationMessage(string property, string message, string value)
         {
-            Property = property;
-            Message = message;
             Value = value;
+            Message = message;
+            Property = property;
         }
         #endregion
 

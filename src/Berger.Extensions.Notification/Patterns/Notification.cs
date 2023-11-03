@@ -1,12 +1,14 @@
-﻿namespace Berger.Extensions.Notification
+﻿using Berger.Extensions.Abstractions;
+
+namespace Berger.Extensions.Notification
 {
-    public partial class Notification : INotification 
+    public partial class Notification : INotification
     {
-        public readonly List<NotificationViewModel> _notifications;
-        public IReadOnlyCollection<NotificationViewModel> Messages => _notifications;
+        public readonly List<INotificationMessage> _notifications;
+        public IReadOnlyCollection<INotificationMessage> Messages => _notifications;
         public Notification()
         {
-            _notifications = new List<NotificationViewModel>();
+            _notifications = new List<INotificationMessage>();
         }
     }
 }

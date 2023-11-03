@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dado um Enum, adiciona notificação caso seu valor não esteja definido dentro do próprio Enum
@@ -14,10 +15,10 @@ namespace Berger.Extensions.Notification
         public void IfEnumInvalid<T>(T model, Expression<Func<T, System.Enum>> selector, string message = "")
         {
             var val = selector.Compile().Invoke(model);
-            var name = string.Empty;
 
             var op = ((UnaryExpression)selector.Body).Operand;
-            name = ((MemberExpression)op).Member.Name;
+
+            var name = ((MemberExpression)op).Member.Name;
 
             if (!val.IsEnumValid())
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfEnumInvalid.ToFormat(name) : message);

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dada uma coleção, adicione uma notificação se for nula
@@ -20,7 +21,7 @@ namespace Berger.Extensions.Notification
             if (colectionValue == null)
             {
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfCollectionIsNull.ToFormat(name) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace Berger.Extensions.Notification
             if (val == null)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfCollectionIsNull.ToFormat(objectName) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace Berger.Extensions.Notification
             if (val == null || val.ToList().Count <= 0)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfCollectionIsNullOrEmpty.ToFormat(objectName) : message);
-            }            
+            }
         }
     }
 }
