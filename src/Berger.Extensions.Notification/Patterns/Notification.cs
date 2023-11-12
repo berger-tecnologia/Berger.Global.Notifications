@@ -4,11 +4,11 @@ namespace Berger.Extensions.Notification
 {
     public partial class Notification : INotification
     {
-        public readonly List<INotificationMessage> _notifications;
-        public IReadOnlyCollection<INotificationMessage> Messages => _notifications;
+        public readonly List<IMessage<NotificationType>> _notifications;
+        public IReadOnlyCollection<IMessage<NotificationType>> Messages => _notifications;
         public Notification()
         {
-            _notifications = new List<INotificationMessage>();
+            _notifications = new List<IMessage<NotificationType>>();
         }
     }
 }

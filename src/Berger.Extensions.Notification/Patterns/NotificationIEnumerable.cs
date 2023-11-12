@@ -30,9 +30,9 @@ namespace Berger.Extensions.Notification
         /// <param name="selector">Nome da propriedade que deseja testar</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma coleção, adicione uma notificação se for nula ou não tenha itens</returns>
-        public void IfCollectionIsNullOrEmpty<T>(T model, Expression<Func<T, IEnumerable<T>>> selector, string message = "")
+        public void IfCollectionIsNullOrEmpty<T>(T model, Expression<Func<T, IQueryable<T>>> selector, string message = "")
         {
-            IEnumerable<T> colectionValue = selector.Compile().Invoke(model);
+            IQueryable<T> colectionValue = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
 
@@ -64,7 +64,7 @@ namespace Berger.Extensions.Notification
         /// <param name="objectName">Nome da propriedade ou objeto que representa a informação</param>
         /// <param name="message">Mensagem de erro (Opcional)</param>
         /// <returns>Dada uma coleção, adicione uma notificação se for nula ou não tenha itens</returns>
-        public void IfCollectionIsNullOrEmpty<T>(IEnumerable<T> val, string objectName, string message = "")
+        public void IfCollectionIsNullOrEmpty<T>(IQueryable<T> val, string objectName, string message = "")
         {
             if (val == null || val.ToList().Count <= 0)
             {

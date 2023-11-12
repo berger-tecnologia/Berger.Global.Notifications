@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{7C3882B4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B73EA06A-DDEC-4FB1-BDEC-C67419A1BB3E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Berger.Extensions.Abstractions", "..\..\Berger.Extensions.Abstractions\src\Berger.Extensions.Abstractions\Berger.Extensions.Abstractions.csproj", "{770370B2-79DA-4724-B9C0-B99B3209C011}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{BFE5C962-637F-4BBB-9455-83BA9C2A5DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE5C962-637F-4BBB-9455-83BA9C2A5DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFE5C962-637F-4BBB-9455-83BA9C2A5DF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{770370B2-79DA-4724-B9C0-B99B3209C011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770370B2-79DA-4724-B9C0-B99B3209C011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770370B2-79DA-4724-B9C0-B99B3209C011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770370B2-79DA-4724-B9C0-B99B3209C011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4385D44E-EBAB-4482-8016-20EFA0212C7E} = {6AD7D5C2-66B8-4B1D-8AEB-37B2BED48BDC}
 		{BFE5C962-637F-4BBB-9455-83BA9C2A5DF6} = {B73EA06A-DDEC-4FB1-BDEC-C67419A1BB3E}
+		{770370B2-79DA-4724-B9C0-B99B3209C011} = {6AD7D5C2-66B8-4B1D-8AEB-37B2BED48BDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {331C3ED2-0250-4A47-95CE-7DA06AD713B8}

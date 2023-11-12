@@ -9,7 +9,7 @@ namespace Berger.Extensions.Notification
         public bool HasNotifications() => _notifications.Any();
         public bool IsValid() => _notifications == null || _notifications.Count == 0;
         public bool IsInvalid() => _notifications != null && _notifications.Any();
-        public List<INotificationMessage> Get() => _notifications;
+        public List<IMessage<NotificationType>> Get() => _notifications;
         public void AddNotification(string property, string message)
         {
             _notifications.Add(new NotificationMessage(property, message));
@@ -18,19 +18,19 @@ namespace Berger.Extensions.Notification
         {
             _notifications.Add(new NotificationMessage(property, string.Format(message, parameters)));
         }
-        public void AddNotification(INotificationMessage notification)
+        public void AddNotification(IMessage<NotificationType> notification)
         {
             _notifications.Add(notification);
         }
-        public void AddNotifications(IReadOnlyCollection<INotificationMessage> notifications)
+        public void AddNotifications(IReadOnlyCollection<IMessage<NotificationType>> notifications)
         {
             _notifications.AddRange(notifications);
         }
-        public void AddNotifications(IList<INotificationMessage> notifications)
+        public void AddNotifications(IList<IMessage<NotificationType>> notifications)
         {
             _notifications.AddRange(notifications);
         }
-        public void AddNotifications(ICollection<INotificationMessage> notifications)
+        public void AddNotifications(ICollection<IMessage<NotificationType>> notifications)
         {
             _notifications.AddRange(notifications);
         }
