@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dada um objeto, adicione uma notificação se for igual null

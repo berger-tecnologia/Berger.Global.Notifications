@@ -11,7 +11,6 @@ namespace Berger.Extensions.Notification.Tests
         protected void Initialize()
         {
         }
-
         public INotification Create() 
         {
             // Service Configuration

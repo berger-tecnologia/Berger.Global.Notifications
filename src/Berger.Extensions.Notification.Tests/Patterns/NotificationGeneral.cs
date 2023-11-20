@@ -484,16 +484,16 @@ namespace Berger.Extensions.Notification.Tests.Patterns
         {
             var _notification = Create();
 
-            _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIEnumerable);
             _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIList);
+            _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIEnumerable);
             _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersICollection);
 
             _customer.CustomersIEnumerable = new List<Customer>().AsEnumerable();
             _customer.CustomersIList = new List<Customer>();
             _customer.CustomersICollection = new List<Customer>();
 
-            _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIEnumerable);
             _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIList);
+            _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersIEnumerable);
             _notification.IfCollectionIsNullOrEmpty(_customer, x => x.CustomersICollection);
 
             Assert.AreEqual(false, _notification.IsValid());

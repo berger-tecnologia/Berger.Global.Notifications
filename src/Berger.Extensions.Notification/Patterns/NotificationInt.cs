@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dado um int, adicione uma notificação se seu valor for menor que o parâmetro min
@@ -319,7 +320,7 @@ namespace Berger.Extensions.Notification
         /// <returns>Dada um objeto int, adicione uma notificação se for igual null</returns>
         public void IfNull(int? val, string objectName, string message = "")
         {
-            
+
             if (val == null)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNull.ToFormat(objectName) : message);
         }

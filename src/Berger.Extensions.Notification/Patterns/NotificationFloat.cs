@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dado um float, adicione uma notificação se seu valor for menor que o parâmetro min
@@ -223,8 +224,6 @@ namespace Berger.Extensions.Notification
         {
             if (val >= number)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfGreaterOrEqualsThan.ToFormat(objectName, number) : message);
-
-            
         }
 
         /// <summary>
@@ -239,8 +238,6 @@ namespace Berger.Extensions.Notification
         {
             if (val <= number)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfLowerOrEqualsThan.ToFormat(objectName, number) : message);
-
-            
         }
 
         /// <summary>
@@ -256,8 +253,6 @@ namespace Berger.Extensions.Notification
         {
             if (val < a || val > b)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotRange.ToFormat(objectName, a, b) : message);
-
-            
         }
 
         /// <summary>
@@ -273,8 +268,6 @@ namespace Berger.Extensions.Notification
         {
             if (val > a && val < b)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfRange.ToFormat(objectName, a, b) : message);
-
-            
         }
 
         /// <summary>
@@ -287,11 +280,8 @@ namespace Berger.Extensions.Notification
         /// <returns>Dada uma string, adicione uma notificação se não for igual a</returns>
         public void IfNotAreEquals(float val, float value, string objectName, string message = "")
         {
-        
             if (val != value)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotAreEquals.ToFormat(objectName, value) : message);
-
-            
         }
 
         /// <summary>
@@ -306,8 +296,6 @@ namespace Berger.Extensions.Notification
         {
             if (val == value)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfAreEquals.ToFormat(objectName, value) : message);
-
-            
         }
 
         /// <summary>
@@ -321,8 +309,6 @@ namespace Berger.Extensions.Notification
         {
             if (val == 0)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfEqualsZero.ToFormat(objectName) : message);
-
-            
         }
 
         /// <summary>
@@ -336,8 +322,6 @@ namespace Berger.Extensions.Notification
         {
             if (val == null)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNull.ToFormat(objectName) : message);
-
-            
         }
 
         /// <summary>

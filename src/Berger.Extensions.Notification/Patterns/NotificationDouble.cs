@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dado um double, adicione uma notificação se seu valor for menor que o parâmetro min
@@ -19,8 +20,6 @@ namespace Berger.Extensions.Notification
 
             if (val < min)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfLowerThan.ToFormat(name, min) : message);
-
-            
         }
 
         /// <summary>
@@ -37,8 +36,6 @@ namespace Berger.Extensions.Notification
 
             if (val > max)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfGreaterThan.ToFormat(name, max) : message);
-
-            
         }
 
         /// <summary>
@@ -55,8 +52,6 @@ namespace Berger.Extensions.Notification
 
             if (val >= number)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfGreaterOrEqualsThan.ToFormat(name, number) : message);
-
-            
         }
 
         /// <summary>
@@ -73,8 +68,6 @@ namespace Berger.Extensions.Notification
 
             if (val <= number)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfLowerOrEqualsThan.ToFormat(name, number) : message);
-
-            
         }
 
         /// <summary>
@@ -92,8 +85,6 @@ namespace Berger.Extensions.Notification
 
             if (val < a || val > b)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotRange.ToFormat(name, a, b) : message);
-
-            
         }
 
         /// <summary>
@@ -111,8 +102,6 @@ namespace Berger.Extensions.Notification
 
             if (val > a && val < b)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfRange.ToFormat(name, a, b) : message);
-
-            
         }
 
         /// <summary>
@@ -129,8 +118,6 @@ namespace Berger.Extensions.Notification
 
             if (val != value)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotAreEquals.ToFormat(name, value) : message);
-
-            
         }
 
         /// <summary>
@@ -163,8 +150,6 @@ namespace Berger.Extensions.Notification
 
             if (val == null)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNull.ToFormat(name) : message);
-
-            
         }
 
         /// <summary>

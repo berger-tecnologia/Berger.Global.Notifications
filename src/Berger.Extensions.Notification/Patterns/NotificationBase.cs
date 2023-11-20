@@ -1,34 +1,36 @@
-﻿namespace Berger.Extensions.Notification
+﻿using Berger.Extensions.Abstractions;
+
+namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         #region Methods
         public int Count() => _notifications.Count();
         public bool HasNotifications() => _notifications.Any();
         public bool IsValid() => _notifications == null || _notifications.Count == 0;
         public bool IsInvalid() => _notifications != null && _notifications.Any();
-        public List<NotificationViewModel> Get() => _notifications;
+        public List<IMessage<NotificationType>> Get() => _notifications;
         public void AddNotification(string property, string message)
         {
-            _notifications.Add(new NotificationViewModel(property, message));
+            _notifications.Add(new NotificationMessage(property, message));
         }
         public void AddNotification(string property, string message, params object[] parameters)
         {
-            _notifications.Add(new NotificationViewModel(property, string.Format(message, parameters)));
+            _notifications.Add(new NotificationMessage(property, string.Format(message, parameters)));
         }
-        public void AddNotification(NotificationViewModel notification)
+        public void AddNotification(IMessage<NotificationType> notification)
         {
             _notifications.Add(notification);
         }
-        public void AddNotifications(IReadOnlyCollection<NotificationViewModel> notifications)
+        public void AddNotifications(IReadOnlyCollection<IMessage<NotificationType>> notifications)
         {
             _notifications.AddRange(notifications);
         }
-        public void AddNotifications(IList<NotificationViewModel> notifications)
+        public void AddNotifications(IList<IMessage<NotificationType>> notifications)
         {
             _notifications.AddRange(notifications);
         }
-        public void AddNotifications(ICollection<NotificationViewModel> notifications)
+        public void AddNotifications(ICollection<IMessage<NotificationType>> notifications)
         {
             _notifications.AddRange(notifications);
         }

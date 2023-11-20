@@ -1,23 +1,29 @@
 ﻿using FluentValidation;
 using System.Collections;
 using System.Linq.Expressions;
+using Berger.Extensions.Abstractions;
 
 namespace Berger.Extensions.Notification
 {
     public interface INotification
     {
+        #region Properties
+        IReadOnlyCollection<IMessage<NotificationType>> Messages { get; }
+        #endregion
+
+        #region Methods
         int Count();
         bool IsValid();
         bool IsInvalid();
-        IReadOnlyCollection<NotificationViewModel> Messages { get; }
         void AddNotification(string property, string message);
         void AddNotification(string property, string message, params object[] parameters);
-        void AddNotification(NotificationViewModel notification);
-        void AddNotifications(ICollection<NotificationViewModel> notifications);
-        void AddNotifications(IList<NotificationViewModel> notifications);
-        void AddNotifications(IReadOnlyCollection<NotificationViewModel> notifications);
+        void AddNotification(IMessage<NotificationType> notification);
+        void AddNotifications(ICollection<IMessage<NotificationType>> notifications);
+        void AddNotifications(IList<IMessage<NotificationType>> notifications);
+        void AddNotifications(IReadOnlyCollection<IMessage<NotificationType>> notifications);
         void ClearNotifications();
         bool HasNotifications();
+        void IfInvalidContract<T>(T model, AbstractValidator<T> validator);
         void CustomCreate(string property, string message);
         void IfAreEquals<T>(T model, Expression<Func<T, double>> selector, double value, string message = "");
         void IfAreEquals(double val, double value, string objectName, string message = "");
@@ -33,8 +39,8 @@ namespace Berger.Extensions.Notification
         void IfAreEquals(DateTime val, DateTime value, string objectName, string message = "");
         void IfCollectionIsNull<T>(T model, Expression<Func<T, IEnumerable>> selector, string message = "");
         void IfCollectionIsNull(IEnumerable val, string objectName, string message = "");
-        void IfCollectionIsNullOrEmpty<T>(T model, Expression<Func<T, IEnumerable<T>>> selector, string message = "");
-        void IfCollectionIsNullOrEmpty<T>(IEnumerable<T> val, string objectName, string message = "");
+        void IfCollectionIsNullOrEmpty<T>(T model, Expression<Func<T, IQueryable<T>>> selector, string message = "");
+        void IfCollectionIsNullOrEmpty<T>(IQueryable<T> val, string objectName, string message = "");
         void IfContains<T>(T model, Expression<Func<T, string>> selector, string text, string message = "");
         void IfContains(string val, string text, string objectName, string message = "");
         void IfEnumInvalid<T>(T model, Expression<Func<T, Enum>> selector, string message = "");
@@ -67,7 +73,6 @@ namespace Berger.Extensions.Notification
         void IfGreaterThan<T>(T model, Expression<Func<T, float>> selector, float max, string message = "");
         void IfGreaterThan(decimal val, decimal max, string objectName, string message = "");
         void IfGreaterThan<T>(T model, Expression<Func<T, decimal>> selector, decimal max, string message = "");
-        void IfInvalidContract<T>(T model, AbstractValidator<T> validator);
         void IfLengthGreaterThan(string val, int max, string objectName, string message = "");
         void IfLengthGreaterThan<T>(T model, Expression<Func<T, string>> selector, int max, string message = "");
         void IfLengthLowerThan(string val, int min, string objectName, string message = "");
@@ -163,7 +168,7 @@ namespace Berger.Extensions.Notification
         void IfNull(DateTime? val, string objectName, string message = "");
         void IfNull(object val, string objectName, string message = "");
         void IfNullOrEmpty<T>(T model, Expression<Func<T, string>> selector, string message = "");
-        void IfNullOrEmpty(string val, string objectName, string message = null);
+        void IfNullOrEmpty(string val, string objectName, string? message = null);
         void IfNullOrInvalidLength(string val, int min, int max, string objectName, string message = "");
         void IfNullOrInvalidLength<T>(T model, Expression<Func<T, string>> selector, int min, int max, string message = "");
         void IfNullOrWhiteSpace(string val, string objectName, string message = "");
@@ -181,4 +186,5 @@ namespace Berger.Extensions.Notification
         void IfTrue<T>(T model, Expression<Func<T, bool>> selector, string message = "");
         void IfTrue(bool val, string objectName, string message = "");
     }
+    #endregion
 }

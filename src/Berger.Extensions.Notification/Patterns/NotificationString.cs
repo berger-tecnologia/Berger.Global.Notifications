@@ -1,10 +1,11 @@
 ﻿using System.Linq.Expressions;
 using System.Text.RegularExpressions;
+using Berger.Extensions.Abstractions;
 using Berger.Extensions.Notification.Resources;
 
 namespace Berger.Extensions.Notification
 {
-    public partial class Notification 
+    public partial class Notification : INotification
     {
         /// <summary>
         /// Dada uma string, adicione uma notificação se for nula ou vazia
@@ -202,13 +203,13 @@ namespace Berger.Extensions.Notification
             int resto;
             cpf = cpf.Trim();
             cpf = cpf.Replace(".", "").Replace("-", "");
+
             if (cpf.Length != 11)
             {
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotCpf.ToFormat(name) : message);
-                
             }
 
-            tempCpf = cpf.Substring(0, 9);
+            tempCpf = cpf[..9];
             soma = 0;
 
             for (int i = 0; i < 9; i++)
@@ -219,7 +220,7 @@ namespace Berger.Extensions.Notification
             else
                 resto = 11 - resto;
             digito = resto.ToString();
-            tempCpf = tempCpf + digito;
+            tempCpf += digito;
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
@@ -228,7 +229,7 @@ namespace Berger.Extensions.Notification
                 resto = 0;
             else
                 resto = 11 - resto;
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             bool isValid = cpf.EndsWith(digito);
 
             if (isValid == false)
@@ -264,9 +265,9 @@ namespace Berger.Extensions.Notification
             if (cnpj.Length != 14)
             {
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotCnpj.ToFormat(name) : message);
-                
+
             }
-            tempCnpj = cnpj.Substring(0, 12);
+            tempCnpj = cnpj[..12];
             soma = 0;
             for (int i = 0; i < 12; i++)
                 soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
@@ -276,7 +277,7 @@ namespace Berger.Extensions.Notification
             else
                 resto = 11 - resto;
             digito = resto.ToString();
-            tempCnpj = tempCnpj + digito;
+            tempCnpj += digito;
             soma = 0;
             for (int i = 0; i < 13; i++)
                 soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
@@ -285,13 +286,13 @@ namespace Berger.Extensions.Notification
                 resto = 0;
             else
                 resto = 11 - resto;
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             bool isValid = cnpj.EndsWith(digito);
 
             if (isValid == false)
             {
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotCnpj.ToFormat(name) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -305,12 +306,10 @@ namespace Berger.Extensions.Notification
             var data = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            Guid x;
-
-            if (Guid.TryParse(data, out x) == false)
+            if (Guid.TryParse(data, result: out _) == false)
             {
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotGuid.ToFormat(name) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -324,9 +323,7 @@ namespace Berger.Extensions.Notification
             var val = selector.Compile().Invoke(model);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            DateTime dt;
-
-            if (DateTime.TryParse(val, out dt) == false)
+            if (DateTime.TryParse(val, out _) == false)
                 AddNotification(name, string.IsNullOrEmpty(message) ? Message.IfNotDate.ToFormat(name) : message);
         }
 
@@ -557,10 +554,9 @@ namespace Berger.Extensions.Notification
             if (cpf.Length != 11)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotCpf.ToFormat(objectName) : message);
-                
             }
 
-            tempCpf = cpf.Substring(0, 9);
+            tempCpf = cpf[..9];
             soma = 0;
 
             for (int i = 0; i < 9; i++)
@@ -571,7 +567,7 @@ namespace Berger.Extensions.Notification
             else
                 resto = 11 - resto;
             digito = resto.ToString();
-            tempCpf = tempCpf + digito;
+            tempCpf += digito;
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
@@ -580,13 +576,13 @@ namespace Berger.Extensions.Notification
                 resto = 0;
             else
                 resto = 11 - resto;
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             bool isValid = cpf.EndsWith(digito);
 
             if (isValid == false)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotCpf.ToFormat(objectName) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -603,7 +599,7 @@ namespace Berger.Extensions.Notification
             if (string.IsNullOrEmpty(cnpj))
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotCnpj.ToFormat(objectName) : message);
-                
+
             }
 
             int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -617,9 +613,9 @@ namespace Berger.Extensions.Notification
             if (cnpj.Length != 14)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotCnpj.ToFormat(objectName) : message);
-                
+
             }
-            tempCnpj = cnpj.Substring(0, 12);
+            tempCnpj = cnpj[..12];
             soma = 0;
             for (int i = 0; i < 12; i++)
                 soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
@@ -629,7 +625,7 @@ namespace Berger.Extensions.Notification
             else
                 resto = 11 - resto;
             digito = resto.ToString();
-            tempCnpj = tempCnpj + digito;
+            tempCnpj += digito;
             soma = 0;
             for (int i = 0; i < 13; i++)
                 soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
@@ -638,13 +634,13 @@ namespace Berger.Extensions.Notification
                 resto = 0;
             else
                 resto = 11 - resto;
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             bool isValid = cnpj.EndsWith(digito);
 
             if (isValid == false)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotCnpj.ToFormat(objectName) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -657,13 +653,10 @@ namespace Berger.Extensions.Notification
         public void IfNotGuid(string val, string objectName, string message = "")
         {
             var data = val;
-
-            Guid x;
-
-            if (Guid.TryParse(data, out x) == false)
+            if (Guid.TryParse(data, out _) == false)
             {
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotGuid.ToFormat(objectName) : message);
-            }            
+            }
         }
 
         /// <summary>
@@ -675,9 +668,7 @@ namespace Berger.Extensions.Notification
         /// <returns>Dada uma string, adicione uma notificação se não for uma data válida</returns>
         public void IfNotDate(string val, string objectName, string message = "")
         {
-            DateTime dt;
-
-            if (DateTime.TryParse(val, out dt) == false)
+            if (DateTime.TryParse(val, out _) == false)
                 AddNotification(objectName, string.IsNullOrEmpty(message) ? Message.IfNotDate.ToFormat(objectName) : message);
         }
 

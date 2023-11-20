@@ -4,9 +4,6 @@ trigger:
     - main
 name: 1.0.0$(Rev:.r)
 
-variables:
-  buildConfiguration: 'Release'
-
 resources:
   repositories:
   - repository: self
@@ -38,7 +35,7 @@ jobs:
     displayName: 'dotnet build'
     inputs:
       projects: '**/*.csproj'
-      arguments: '--configuration $(buildConfiguration)'
+      arguments: '--configuration Release'
 
   - task: DotNetCoreCLI@2
     displayName: dotnet pack
