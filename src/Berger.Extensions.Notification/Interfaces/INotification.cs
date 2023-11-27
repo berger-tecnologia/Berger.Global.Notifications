@@ -8,7 +8,7 @@ namespace Berger.Extensions.Notification
     public interface INotification
     {
         #region Properties
-        IReadOnlyCollection<IMessage<NotificationType>> Messages { get; }
+        IReadOnlyCollection<NotificationMessage> Messages { get; }
         #endregion
 
         #region Methods
@@ -17,10 +17,10 @@ namespace Berger.Extensions.Notification
         bool IsInvalid();
         void AddNotification(string property, string message);
         void AddNotification(string property, string message, params object[] parameters);
-        void AddNotification(IMessage<NotificationType> notification);
-        void AddNotifications(ICollection<IMessage<NotificationType>> notifications);
-        void AddNotifications(IList<IMessage<NotificationType>> notifications);
-        void AddNotifications(IReadOnlyCollection<IMessage<NotificationType>> notifications);
+        void AddNotification(NotificationMessage notification);
+        void AddNotifications(ICollection<NotificationMessage> notifications);
+        void AddNotifications(IList<NotificationMessage> notifications);
+        void AddNotifications(IReadOnlyCollection<NotificationMessage> notifications);
         void ClearNotifications();
         bool HasNotifications();
         void IfInvalidContract<T>(T model, AbstractValidator<T> validator);
