@@ -2,11 +2,11 @@
 	<PropertyGroup>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.8.0" />
+		<PackageReference Include="FluentValidation" Version="11.9.2" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<PackageReference Include="Berger.Extensions.Abstractions" Version="1.0.0.3" />
+		<PackageReference Include="Berger.Extensions.Abstractions" Version="1.0.0.9" />
 	</ItemGroup>
 
 	<ItemGroup>

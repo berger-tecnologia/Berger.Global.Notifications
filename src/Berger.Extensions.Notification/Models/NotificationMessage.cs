@@ -2,7 +2,7 @@
 
 namespace Berger.Extensions.Notification
 {
-    public class NotificationMessage : BaseEntity, IMessage<NotificationType>
+    public class NotificationMessage : BaseEntity
     {
         #region Constructors
         public NotificationMessage(string property, string message)
@@ -19,7 +19,7 @@ namespace Berger.Extensions.Notification
         #endregion
 
         #region Properties
-        public NotificationType MessageType { get; set; }
+        public NotificationType NotificationType { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Property { get; set; } = string.Empty;
