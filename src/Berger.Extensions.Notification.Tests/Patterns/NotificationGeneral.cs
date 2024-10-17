@@ -4,8 +4,8 @@ using System.Threading;
 using System.Globalization;
 using System.Collections.Generic;
 using Berger.Extensions.Notification.Tests.Models;
-using Berger.Extensions.Notification.Tests.Requests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Berger.Extensions.Notification.Tests.Requests;
 
 namespace Berger.Extensions.Notification.Tests.Patterns
 {
